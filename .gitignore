@@ -1,0 +1,10 @@
+# Log files
+debug.log
+npm-debug.log
+*.log
+
+# Node.js modules
+node_modules
+
+# Visual Studio Code settings
+.vscode
