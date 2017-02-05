@@ -1,0 +1,9 @@
+$centralize-block
+  margin-right: auto
+  margin-left: auto
+
+centralize($type)
+  $isBlock = ($type == inline-block || $type == block)
+  if $isBlock
+    display: $type
+    @extend $centralize-block

@@ -1,15 +1,16 @@
 const path = require('path');
-
 const HtmlPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const config = {
   entry: path.join(__dirname, './app/index.js'),
   output: {
     filename: 'game.js',
-    path: './'
+    path: __dirname
   },
   resolve: {
     extensions: ['.js', '.json'],
+    modules: ['node_modules']
   },
   module: {
     loaders: [
@@ -24,7 +25,10 @@ const config = {
       },
       {
         test: /\.styl$/,
-        loaders: ['style-loader', 'css-loader', 'stylus-loader']
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', 'stylus-loader']
+        })
       }
     ]
   },
@@ -32,7 +36,8 @@ const config = {
     new HtmlPlugin({
       filename: 'index.html',
       template: 'app/ui/view.pug'
-    })
+    }),
+    new ExtractTextPlugin('[name].css')
   ]
 };
 

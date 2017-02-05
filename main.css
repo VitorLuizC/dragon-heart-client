@@ -1,0 +1,15 @@
+.renderer-container > .renderer {
+  margin-right: auto;
+  margin-left: auto;
+}
+html,
+body {
+  height: 100%;
+}
+body,
+figure {
+  margin: 0;
+}
+.renderer-container > .renderer {
+  display: block;
+}
