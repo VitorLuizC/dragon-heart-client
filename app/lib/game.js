@@ -1,5 +1,5 @@
-import * as config from './config.js';
-import { CanvasRenderer } from 'pixi.js';
+import { size } from './config.js';
+import { CanvasRenderer, RenderTexture } from 'pixi.js';
 import { getElement } from './html.js';
 
 /**
@@ -13,10 +13,15 @@ let animation = null;
  * <canvas id="game"></canvas>
  */
 const canvas = getElement('#game');
-const renderer = new CanvasRenderer(config.size.width, config.size.height, { view: canvas });
+
+const renderer = new CanvasRenderer(size.width, size.height, {
+  view: canvas,
+  transparent: true,
+  antialias: true
+});
 
 function draw() {
-  // TODO: Draw only objects that appears on the view range
+  // TODO: Render the view that contains game things
 }
 
 /**
