@@ -1,8 +1,6 @@
 extends base/layout.pug
 
-mixin renderer(id)
-  figure.renderer-container&attributes(attributes)
-    canvas.renderer(id=id)
+include component/renderer.pug
 
 block content
   +renderer("game")
