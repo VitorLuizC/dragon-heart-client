@@ -1,11 +1,11 @@
 {
   "name": "dragon-heart-client",
   "version": "0.1.0",
-  "description": "",
+  "description": "Dragon Heart &#x25cf; Online game client with HTML, CSS & JavaScript.",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --display-error-details",
+    "build": "webpack --progress --display-error-details --devtool inline-source-map",
     "watch": "npm run build & webpack --watch",
     "start": "npm run build & electron ."
   },
