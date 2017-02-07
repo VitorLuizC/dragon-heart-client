@@ -5,8 +5,8 @@
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --progress --display-error-details --devtool inline-source-map",
-    "watch": "npm run build & webpack --watch --progress --display-error-details --devtool inline-source-map",
+    "build": "webpack --progress",
+    "watch": "webpack --watch --display-error-details --devtool inline-source-map",
     "start": "npm run build & electron ."
   },
   "repository": {
