@@ -1,11 +1,16 @@
-import { Graphics } from 'pixi.js';
+import { Sprite } from 'pixi.js';
+import resource from './resource.js';
 
-const color = 0x009100;
+const sprite = new Sprite();
 
-const ground = new Graphics();
+/**
+ * @param {number} x
+ * @param {number} y
+ */
+function render(x, y) {
+  sprite.texture = resource.cache['grass'].texture;
+  sprite.position.set(x, y);
+  return sprite;
+}
 
-ground.drawRect(0, 0, 32, 32);
-ground.startFill(color);
-ground.endFill();
-
-export { color, ground };
+export default { sprite, render };

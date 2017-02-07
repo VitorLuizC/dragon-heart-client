@@ -1,7 +1,7 @@
-import { load } from './resource.js';
-import { size } from './config.js';
-import * as view from './view.js';
-import { CanvasRenderer } from 'pixi.js';
+import resource from './resource.js';
+import { size } from './position.js';
+import { render } from './view.js';
+import { CanvasRenderer, Container } from 'pixi.js';
 import { getElement } from './html.js';
 
 /**
@@ -9,6 +9,11 @@ import { getElement } from './html.js';
  * AnimationFrame
  */
 let animation = null;
+
+/**
+ * @type {Container}
+ */
+let view = null;
 
 /**
  * @type {HTMLCanvasElement}
@@ -25,7 +30,7 @@ const renderer = new CanvasRenderer(size.width, size.height, {
  * Render view container.
  */
 function draw() {
-  renderer.render(view.render());
+  renderer.render(view);
   animation = requestAnimationFrame(draw);
 }
 
@@ -33,8 +38,9 @@ function draw() {
  * Start game drawing.
  */
 function start() {
-  load()
+  resource.load()
     .then(() => {
+      view = render();
       draw();
     });
 }
