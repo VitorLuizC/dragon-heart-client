@@ -38,11 +38,14 @@ function draw() {
  * Start game drawing.
  */
 function start() {
-  resource.load()
-    .then(() => {
-      view = render();
-      draw();
-    });
+  resource
+    .load()
+    .then(setup);
+
+  function setup() {
+    view = render();
+    draw();
+  }
 }
 
 /**

@@ -10,12 +10,14 @@ function load() {
     try {
       loader
         .add('grass', 'resource/grass.png')
-        .load(() => {
-          cache = loader.resources;
-          resolve();
-        });
+        .load(setup);
     } catch (err) {
       reject(err);
+    }
+
+    function setup() {
+      cache = loader.resources;
+      resolve();
     }
   });
 }

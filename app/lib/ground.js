@@ -11,10 +11,13 @@ function getTypes() {
 /**
  * Create a new <T extends DisplayObject> using a color or a texture.
  * @param {number|PIXI.Texture} fill
+ * @param {number} x
+ * @param {number} y
  * @returns {(PIXI.Graphics|PIXI.Sprite)}
  */
-function createDisplay(fill) {
+function createDisplay(fill, x, y) {
   var display;
+  var position = calcPosition(x, y);
 
   if (typeof fill === 'number') {
     display = new Graphics();
@@ -26,37 +29,26 @@ function createDisplay(fill) {
     display.texture = fill.texture;
   }
 
-  return display;
-}
-
-/**
- * Returns a <T extends DisplayObject> that contains ground type.
- * @param {string} type Name of ground type.
- * @param {number} x
- * @param {number} y
- * @returns {(PIXI.Graphics|PIXI.Sprite)}
- */
-function renderItem(type, x, y) {
-  const display = createDisplay(getTypes()[type]);
-  const position = calcPosition(x, y);
-
   display.position.set(position.x, position.y);
 
   return display;
 }
 
 /**
- * Render ground container and transform it using a map.
+ * Returns a <T extends DisplayObject> with ground type.
  * @param {Array.<Array.<string>>} map
  * @returns {Container}
  */
 function render(map) {
   var container = new Container();
+  var types = getTypes();
 
   for (let x = 0; x < map.length; x++) {
     for (let y = 0; y < map[x].length; y++) {
       let type = map[x][y];
-      container.addChild(renderItem(type, x, y));
+      let display = createDisplay(types[type], x, y);
+
+      container.addChild(display);
     }
   }
 
@@ -65,4 +57,4 @@ function render(map) {
   return container;
 }
 
-export { getTypes, render };
+export { getTypes, createDisplay, render };
