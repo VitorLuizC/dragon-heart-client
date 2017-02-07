@@ -1,5 +1,7 @@
+import { load } from './resource.js';
 import { size } from './config.js';
-import { CanvasRenderer, RenderTexture } from 'pixi.js';
+import * as view from './view.js';
+import { CanvasRenderer } from 'pixi.js';
 import { getElement } from './html.js';
 
 /**
@@ -16,19 +18,25 @@ const canvas = getElement('#game');
 
 const renderer = new CanvasRenderer(size.width, size.height, {
   view: canvas,
-  transparent: true,
-  antialias: true
+  transparent: true
 });
 
+/**
+ * Render view container.
+ */
 function draw() {
-  // TODO: Render the view that contains game things
+  renderer.render(view.render());
+  animation = requestAnimationFrame(draw);
 }
 
 /**
  * Start game drawing.
  */
 function start() {
-  draw();
+  load()
+    .then(() => {
+      draw();
+    });
 }
 
 /**
