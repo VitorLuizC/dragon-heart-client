@@ -1,6 +1,8 @@
 extends base/layout.pug
 
+include component/loader.pug
 include component/renderer.pug
 
 block content
+  +loader()
   +renderer("game")

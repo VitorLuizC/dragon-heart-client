@@ -1,0 +1,31 @@
+get-y-size($sizes)
+  $y = null
+
+  if length($sizes) == 1
+    $y = $sizes * 2
+  else if length($sizes) == 2
+    $y = $sizes[0] * 2
+  else if length($sizes) == 3
+    $y = calc($sizes[0] + $sizes[2])
+
+  return $y
+
+get-x-size($sizes)
+  $x = null
+  if length($sizes) == 1
+    $x = $sizes * 2
+  else if length($sizes) in (2 3)
+    $x = $sizes[1] * 2
+  else if length($sizes) == 4
+    calc($sizes[0] + $sizes[2])
+
+  return $x
+
+get-directions($sizes)
+  $directions = {}
+  $directions.top = $sizes[0]
+  $directions.right = length($sizes) > 1 ? $sizes[1] : $directions.top
+  $directions.bottom = length($sizes) > 2 ? $sizes[2] : $directions.top
+  $directions.left = length($sizes) > 3 ? $sizes[3] : $directions.right
+
+  return $directions

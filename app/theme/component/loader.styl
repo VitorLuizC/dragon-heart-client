@@ -1,0 +1,19 @@
+.loader-container
+  centralize(absolute, both)
+
+  > .loaded-item
+  > .loader-bar
+    display: block
+
+  > .loaded-item
+    margin: 0
+
+  > .loader-bar
+    height: $loader.$bar.height
+
+.loader-bar
+  > .progress
+    box-sizing: border-box
+    height: $loader.$bar.height - get-y-size($loader.$progress.padding)
+    padding: $loader.$progress.padding
+    background-color: $loader.$progress.color

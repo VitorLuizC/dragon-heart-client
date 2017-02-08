@@ -2,8 +2,28 @@ $centralize-block
   margin-right: auto
   margin-left: auto
 
-centralize($type)
-  $isBlock = ($type == inline-block || $type == block)
-  if $isBlock
+$centralize-absolute-both
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+
+$centralize-absolute-vertical
+  top: 50%
+  transform: translateY(-50%)
+
+$centralize-absolute-horizontal
+  left: 50%
+  transform: translateX(-50%)
+
+centralize($type, $direction = horizontal)
+  if $direction != horizontal and $direction != vertical and $direction != both
+    error('Invalid direction. Only horizontal, vertical and both are valid.')
+
+  if $type == absolute or $type == fixed
+    position: $type
+    @extend $centralize-absolute-{$direction}
+  else if $type == inline-block or $type == block
+    if $direction == vertical or $direction == both
+      error('Centralize-block cant centralize vertically.')
     display: $type
     @extend $centralize-block
