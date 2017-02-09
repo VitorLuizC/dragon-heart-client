@@ -1,12 +1,21 @@
-import { resources } from './resource.js';
-import { Sprite } from 'pixi.js';
+import { Graphics } from 'pixi.js';
+import { calcPosition } from './position.js';
 
-const sprite = new Sprite();
+const sprite = new Graphics();
+
+const model = {
+  name: 'Homem Pombo',
+  location: {
+    name: 'world',
+    position: { x: 0, y: 0, z: 0 }
+  }
+};
 
 function render() {
-  sprite.texture = resources.person.texture;
-  sprite.position.set(0, 0);
+  sprite.beginFill(0xff00ff);
+  sprite.drawCircle(model.x, model.y, 32);
+  sprite.endFill();
   return sprite;
 }
 
-export { sprite, render };
+export default { render, ...model };

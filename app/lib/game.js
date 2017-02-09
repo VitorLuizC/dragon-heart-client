@@ -1,25 +1,24 @@
-import resource from './resource.js';
+import { CanvasRenderer } from 'pixi.js';
 import { size } from './position.js';
-import { render } from './view.js';
-import { CanvasRenderer, Container } from 'pixi.js';
-import { getElement } from './html.js';
+import view from './view.js';
+import { html } from './util.js';
 
 /**
  * @type {number}
  * AnimationFrame
  */
-let animation = null;
+var animation = null;
 
 /**
- * @type {Container}
+ * @type {PIXI.Container}
  */
-let view = null;
+var stage = null;
 
 /**
  * @type {HTMLCanvasElement}
  * <canvas id="game"></canvas>
  */
-const canvas = getElement('#game');
+const canvas = html.getElement('#game');
 
 const renderer = new CanvasRenderer(size.width, size.height, {
   view: canvas,
@@ -30,7 +29,7 @@ const renderer = new CanvasRenderer(size.width, size.height, {
  * Render view container.
  */
 function draw() {
-  renderer.render(view);
+  renderer.render(stage);
   animation = requestAnimationFrame(draw);
 }
 
@@ -38,14 +37,8 @@ function draw() {
  * Start game drawing.
  */
 function start() {
-  resource
-    .load()
-    .then(setup);
-
-  function setup() {
-    view = render();
-    draw();
-  }
+  stage = view.render();
+  requestAnimationFrame(draw);
 }
 
 /**
@@ -55,4 +48,4 @@ function stop() {
   cancelAnimationFrame(animation);
 }
 
-export { start, stop };
+export default { start, stop };

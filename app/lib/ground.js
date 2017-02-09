@@ -4,13 +4,14 @@ import { Graphics, Sprite, Container } from 'pixi.js';
 
 function getTypes() {
   return {
-    '0': 0x009100
+    '0': 0x009100,
+    '1': resource.cache['grass']
   };
 }
 
 /**
  * Create a new <T extends DisplayObject> using a color or a texture.
- * @param {number|PIXI.Texture} fill
+ * @param {number|PIXI.loaders.Resource} fill
  * @param {number} x
  * @param {number} y
  * @returns {(PIXI.Graphics|PIXI.Sprite)}
@@ -45,14 +46,13 @@ function render(map) {
 
   for (let x = 0; x < map.length; x++) {
     for (let y = 0; y < map[x].length; y++) {
-      let type = map[x][y];
-      let display = createDisplay(types[type], x, y);
-
-      container.addChild(display);
+      let keys = map[x][y].tiles;
+      for (let key of keys) {
+        let display = createDisplay(types[key], x, y);
+        container.addChild(display);
+      }
     }
   }
-
-  container.setTransform(0, 0, 1, 1, 0, -.8, .141, 0, 0);
 
   return container;
 }

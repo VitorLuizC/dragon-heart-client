@@ -9,7 +9,7 @@ function load() {
   return new Promise((resolve, reject) => {
     try {
       loader
-        .add('grass', 'resource/grass.png')
+        .add('grass', 'Resources/Images/grass.png')
         .load(setup);
     } catch (err) {
       reject(err);
